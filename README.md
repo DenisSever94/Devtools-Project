@@ -40,5 +40,5 @@
 - 'feature/DVT-3'- ветка для разработки задачи DVT-3
 
 ### RUNBOOK
-- **Перед каждым коммитом и push необходимо выполнять git status и убедиться, что статус чистый (working tree clean)**
+- **Перед каждым commit и push необходимо выполнять git status и убедиться, что статус чистый (working tree clean)**
 
