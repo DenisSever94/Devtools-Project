@@ -8,9 +8,9 @@ public record Mentee(
         int totalLessons
 ) {
 
-    public Mentee {
-        if (completedLessons < 0 || totalLessons <= 0 || completedLessons > totalLessons) {
-            throw new IllegalArgumentException("Некорректные значения");
-        }
+  public Mentee {
+    if (completedLessons < 0 || totalLessons <= 0 || completedLessons > totalLessons) {
+      throw new IllegalArgumentException("Некорректные значения");
     }
+  }
 }
