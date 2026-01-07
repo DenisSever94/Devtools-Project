@@ -3,6 +3,8 @@ package ru.mentee.power.devtools.student;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,80 +19,77 @@ public class StudentListTest {
   @DisplayName("Должен корректно добавлять студента в список")
   void shouldAddStudentToList() {
     Student ivan = new Student("Иванов Иван", "Москва");
-    ArrayList<Student> students = new ArrayList<>();
+    StudentList students = new StudentList();
 
-    students.add(ivan);
+    students.addStudent(ivan);
 
-    assertEquals(1, students.size(), "Размер должен быть 1");
-    assertEquals(ivan, students.getFirst(), "Иван должен быть на позиции 0");
+    List<Student> studentFromMoscow = students.getStudentsByCity("Москва");
+    assertThat(studentFromMoscow)
+        .hasSize(1)
+        .containsExactly(ivan);
   }
 
   @Test
   @DisplayName("Добавление name null and city null в коллекцию")
   void shouldAddStudentWithNullFields() {
     Student studentWithNulls = new Student(null, null);
-    ArrayList<Student> students = new ArrayList<>();
+    StudentList student = new StudentList();
 
-    students.add(studentWithNulls);
+    student.addStudent(studentWithNulls);
 
-    Student result = students.getFirst();
-
-    assertNotNull(result, "Объект студента не должен быть null");
+    assertNotNull(student, "Объект студента не должен быть null");
   }
 
   @Test
-  @DisplayName("Добавление name null в коллекцию")
+  @DisplayName("Добавление null в коллекцию")
   void shouldAddStudentWithNameNull() {
-    Student studentWithNameNull = new Student(null, "Москва");
-    ArrayList<Student> students = new ArrayList<>();
 
-    students.add(studentWithNameNull);
+    StudentList students = new StudentList();
 
-    Student result = students.getFirst();
+    students.addStudent(null);
 
-    assertNotNull(result, "Имя студента не должно быть null");
+    assertThat(students.getStudentsByCity("Любой город")).isEmpty();
   }
 
   @Test
-  @DisplayName("Добавление city null в коллекцию")
-  void shouldAddStudentWithCityNull() {
-    Student studentWithCityNull = new Student("Иван", null);
-    ArrayList<Student> students = new ArrayList<>();
-
-    students.add(studentWithCityNull);
-
-    Student result = students.getFirst();
-
-    assertNotNull(result, "Город студента не должен быть null");
-  }
-
-  @Test
-  @DisplayName("Получить студента по имени и городу")
+  @DisplayName("Должен вернуть студента по городу")
   void shouldReturnStudentFromSpecificCityAndName() {
-    Student student = new Student("Иван", "Москва");
-    ArrayList<Student> students = new ArrayList<>();
+    StudentList students = new StudentList();
+    students.addStudent(new Student("Иван", "Москва"));
 
-    students.add(student);
+    List<Student> result = students.getStudentsByCity("Москва");
 
-    Student result = students.getFirst();
-
-    assertEquals(result, student);
+    assertThat(result)
+        .hasSize(1)
+        .extracting(Student::city)
+        .containsExactlyInAnyOrder("Москва");
   }
 
   @Test
-  @DisplayName("Получить всех студентов по городу")
+  @DisplayName("Должен возвращать студентов только из указанного города")
   void shouldReturnStudentsFromSpecificCity() {
     StudentList list = new StudentList();
     list.addStudent(new Student("Иван", "Москва"));
     list.addStudent(new Student("Иван", "Пермь"));
     list.addStudent(new Student("Дмитрий", "Москва"));
 
-    List<Student> result = list.
-        getStudentsFromSpecificCityWithVeryLongMethodNameThatExceedsOneHundredTwentyCharacters("Москва");
+    List<Student> result = list.getStudentsByCity("Москва");
 
     assertThat(result)
         .hasSize(2)
         .extracting(Student::name)
         .containsExactlyInAnyOrder("Иван", "Дмитрий");
+  }
+
+  @Test
+  @DisplayName("Добавить студента в список")
+  void shouldAddStudentInList() {
+    Student student = new Student("Иван", "Москва");
+    List<Student> studentList = new ArrayList<>();
+    studentList.add(student);
+
+    assertEquals(1, studentList.size());
+    assertTrue(studentList.contains(student));
+    assertSame(student, studentList.getFirst());
   }
 }

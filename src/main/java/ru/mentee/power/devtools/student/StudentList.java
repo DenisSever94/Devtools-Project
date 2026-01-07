@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentList {
-  private List<Student> studentList;
+  private final List<Student> studentList;
 
   public StudentList() {
     this.studentList = new ArrayList<>();
@@ -16,7 +16,7 @@ public class StudentList {
     }
   }
 
-  public List<Student> getStudentsFromSpecificCityWithVeryLongMethodNameThatExceedsOneHundredTwentyCharacters(
+  public List<Student> getStudentsByCity(
       String city) {
     return studentList.stream().filter(s -> s.city().equals(city)).toList();
   }
