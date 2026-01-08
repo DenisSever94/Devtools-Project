@@ -4,7 +4,6 @@ import ru.mentee.power.devtools.progress.Mentee;
 import ru.mentee.power.devtools.progress.ProgressTracker;
 
 public class ProgressDemo {
-
   public static void main(String[] args) {
     ProgressTracker tracker = new ProgressTracker();
     Mentee[] mentees = {
