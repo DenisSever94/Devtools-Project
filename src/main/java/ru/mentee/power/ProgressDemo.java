@@ -6,7 +6,7 @@ import ru.mentee.power.devtools.progress.Mentee;
 import ru.mentee.power.devtools.progress.ProgressTracker;
 
 public class ProgressDemo {
-  private static final Logger log = LoggerFactory.getLogger(ProgressDemo.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ProgressDemo.class);
 
   public static void main(String[] args) {
     ProgressTracker tracker = new ProgressTracker();
@@ -17,6 +17,6 @@ public class ProgressDemo {
     };
 
     String progress = tracker.calculateTotalProgress(mentees);
-    log.info(progress);
+    LOG.info(progress);
   }
 }
