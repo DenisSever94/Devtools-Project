@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentList {
-  private final List<Student> studentList;
+  private final List<Student> students;
 
   public StudentList() {
-    this.studentList = new ArrayList<>();
+    this.students = new ArrayList<>();
   }
 
   public void addStudent(Student student) {
     if (student != null) {
-      studentList.add(student);
+      students.add(student);
     }
   }
 
   public List<Student> getStudentsByCity(
       String city) {
-    return studentList.stream().filter(s -> s.city().equals(city)).toList();
+    return students.stream().filter(s -> s.city().equals(city)).toList();
   }
 }

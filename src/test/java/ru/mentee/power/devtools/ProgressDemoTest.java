@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import ru.mentee.power.ProgressDemo;
 
 @DisplayName("Testing ProgressDemo")
-public class ProgressDemoTest {
+class ProgressDemoTest {
 
   @Test
   void mainShouldPrintTotalProgress() {

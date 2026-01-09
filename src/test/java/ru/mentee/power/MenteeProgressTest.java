@@ -3,7 +3,7 @@ package ru.mentee.power;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class MenteeProgressTest {
+class MenteeProgressTest {
 
   @Test
   void shouldFormatSummaryWhenProgressCreated() {

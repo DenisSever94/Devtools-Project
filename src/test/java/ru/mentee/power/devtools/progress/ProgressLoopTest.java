@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("Testing ProgressTracking")
-public class ProgressLoopTest {
+class ProgressLoopTest {
 
   @Test
   @DisplayName("Должен корректно вычислять суммарный прогресс когда передан массив mentee")

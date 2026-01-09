@@ -13,7 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("Testing class StudentList")
-public class StudentListTest {
+class StudentListTest {
 
   @Test
   @DisplayName("Должен корректно добавлять студента в список")
