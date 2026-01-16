@@ -11,10 +11,14 @@ public class LiveCodingDemo {
 
     printFizzBuzz(15);
 
-    LOG.info("Сумма всех четных чисел в массиве {}", sumEven(arrayNumber));
-
     try {
       LOG.info("Максимальное число в массиве {}", findMax(arrayNumber));
+    } catch (IllegalArgumentException e) {
+      LOG.error(e.getMessage());
+    }
+
+    try {
+      LOG.info("Сумма всех четных чисел в массива: {}", sumEven(arrayNumber));
     } catch (IllegalArgumentException e) {
       LOG.error(e.getMessage());
     }
@@ -35,6 +39,9 @@ public class LiveCodingDemo {
   }
 
   public static int sumEven(int[] numbers) {
+    if (numbers == null || numbers.length == 0) {
+      throw new IllegalArgumentException("Массив пуст");
+    }
     int sum = 0;
     for (int number : numbers) {
       if (number % 2 == 0) {
