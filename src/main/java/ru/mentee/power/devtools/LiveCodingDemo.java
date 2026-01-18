@@ -1,5 +1,9 @@
 package ru.mentee.power.devtools;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,17 +11,48 @@ public class LiveCodingDemo {
   private static final Logger LOG = LoggerFactory.getLogger(LiveCodingDemo.class);
 
   public static void main(String[] args) {
-    int[] arrayNumber = {12, 22, 1, 2, 42};
+    List<Integer> numbers = new ArrayList<>();
+    numbers.add(1);
+    numbers.add(2);
+    numbers.add(3);
+    numbers.add(4);
+    numbers.add(5);
 
-    printFizzBuzz(15);
 
-    LOG.info("Сумма всех четных чисел в массиве {}", sumEven(arrayNumber));
+    List<String> str = new ArrayList<>();
+    str.add("A");
+    str.add("D");
+    str.add("B");
+    str.add("V");
+    str.add("G");
+    str.add("C");
+    str.add("O");
 
-    try {
-      LOG.info("Максимальное число в массиве {}", findMax(arrayNumber));
-    } catch (IllegalArgumentException e) {
-      LOG.error(e.getMessage());
+    Collections.sort(numbers);
+    Collections.sort(str);
+    LiveCodingDemo demo = new LiveCodingDemo();
+    LOG.info("{}", demo.findIndex(numbers, 12));
+    LOG.info("{}", demo.findIndex(str, "O"));
+  }
+
+  public <T> int findIndex(List<? extends Comparable<? super T>> list, T target) {
+
+    int low = 0;
+    int high = list.size() - 1;
+    while (low <= high) {
+      int mid = (low + high) >>> 1;
+      Comparable<? super T> midVal = list.get(mid);
+      int cmp = midVal.compareTo(target);
+
+      if (cmp < 0) {
+        low = mid + 1;
+      } else if (cmp > 0) {
+        high = mid - 1;
+      } else {
+        return mid;
+      }
     }
+    return -(low + 1);
   }
 
   public static void printFizzBuzz(int n) {
